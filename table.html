@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="table.css">
+    <title>TABLE - SEARCH ENGINE</title>
+</head>
+
+<body>
+    <table class="container">
+        <thead>
+            <tr>
+                <th>Student name</th>
+                <th>Student email</th>
+                <th>Student course</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="3">
+                    <input type="text" id="searchField" />
+                    <button type="button" id="searchBtn">Search</button>
+                </td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr>
+                <td>John Dan</td>
+                <td>john@john-dan.com</td>
+                <td>JS-CORE</td>
+            </tr>
+            <tr>
+                <td>Max Peterson</td>
+                <td>max@kingslanduniversity.com</td>
+                <td>JS-WEB</td>
+            </tr>
+            <tr>
+                <td>Philip Anderson</td>
+                <td>philip@kingslanduniversity.com</td>
+                <td>FRONT-END</td>
+            </tr>
+            <tr>
+                <td>Sam Lima</td>
+                <td>sam@gmail.com</td>
+                <td>TECH-JS</td>
+            </tr>
+            <tr>
+                <td>Eva Longoria</td>
+                <td>eva@gmail.com</td>
+                <td>All possible courses</td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="result"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('searchBtn').addEventListener('click', function() {
+                // Clear previous search results
+                document.querySelectorAll('.select').forEach(function(row) {
+                    row.classList.remove('select');
+                });
+
+                // Get the search term
+                var searchTerm = document.getElementById('searchField').value.toLowerCase();
+                var tableRows = document.querySelectorAll('.container tbody tr');
+
+                // Search for the term in the table rows
+                tableRows.forEach(function(row) {
+                    var cells = row.getElementsByTagName('td');
+                    for (var i = 0; i < cells.length; i++) {
+                        if (cells[i].textContent.toLowerCase().indexOf(searchTerm) !== -1) {
+                            row.classList.add('select');
+                            break;
+                        }
+                    }
+                });
+
+                // Clear the search field
+                document.getElementById('searchField').value = '';
+            });
+        });
+    </script>
+</body>
+
+</html>
